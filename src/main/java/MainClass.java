@@ -9,10 +9,9 @@ public class MainClass {
 
     public static void main (String [] args){
         FindWords oFindWords = new FindWords();
-        oList= oFindWords.getListPossibleWords("sdf");
+        oList= oFindWords.getListPossibleWords("LSTA");
 
         System.out.println(oList.toString());
-
 
     }
 }

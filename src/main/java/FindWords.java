@@ -3,7 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 
 /**
  * Created by veyra.gutierrez on 13/04/2016.
@@ -12,39 +14,40 @@ public class FindWords {
 
     FileReader reader = null;
     BufferedReader bReader = null;
-    CapitalizeReader cReader = null;
-
-    String allText = "";
     List<String> oListDictionary = null;
 
 
     public FindWords(){
         getWords();
     }
-    public List<String> getWords() {
+    public List<String> getWords()
+    {
         try {
-            reader = new FileReader("C:\\Temp\\Text50Words.txt");
+
+            reader = new FileReader("src\\utilities\\Text50Words.txt");
             bReader = new BufferedReader(reader);
-            //cReader = new CapitalizeReader(bReader);
             oListDictionary = new ArrayList<String>();
 
             String line;
-            while ((line = bReader.readLine()) != null) {
-                //allText += line + "\n";
+            while ((line = bReader.readLine()) != null)
+            {
                 oListDictionary.add(line);
-
             }
 
             return oListDictionary;
 
-        } catch (FileNotFoundException eFielNotFound) {
+        }
+        catch (FileNotFoundException eFielNotFound)
+        {
             eFielNotFound.printStackTrace();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             if (bReader != null) {
                 try {
-
                     reader.close();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -56,8 +59,11 @@ public class FindWords {
 
 
     public List<String> getListPossibleWords(String sInputText){
+
         String sWordToIterate = sInputText.toUpperCase();
+
         int iStringLenght = sWordToIterate.length();
+
         List<String> oListPossibleWords = new ArrayList<String>();
         List<String> oListFinalPWords = new ArrayList<String>();
 
@@ -71,33 +77,26 @@ public class FindWords {
             }
         }
 
-
         for (String sPossibleWord: oListPossibleWords) {
 
-            sPossibleWord.contains(sInputText);
+            boolean bCharOk = true;
 
-//            boolean bCharOk = false;
-//            int iCharsCount = 0;
-//            aCharPossibleWord = sPossibleWord.toCharArray();
+            aCharPossibleWord = sPossibleWord.toCharArray();
 
-//            for (int j= 0; j< aCharToIterate.length; j++) {
-//                for (int k=0; k< sPossibleWord.length(); k++) {
-//                    if (aCharToIterate[j]==aCharPossibleWord[k])
-//                    {
-//                        bCharOk = true;
-//                        iCharsCount++;
-//                        break;
-//                    }
-//                }
-//            }
-//            if(bCharOk && (iCharsCount == aCharToIterate.length)){
-//                System.out.println("Posible Word:" + sPossibleWord);
-//                oListFinalPWords.add(sPossibleWord);
-//            }
+            Arrays.sort(aCharPossibleWord);
+            Arrays.sort(aCharToIterate);
 
+            for (int j = 0; j < aCharToIterate.length; j++) {
+                    if (aCharToIterate[j] != aCharPossibleWord[j]) {
+                        bCharOk = false;
+                        break;
+                }
+            }
+            if(bCharOk){
+                //System.out.println("Posible Word:" + sPossibleWord);
+                oListFinalPWords.add(sPossibleWord);
+            }
         }
-
         return oListFinalPWords;
     }
-
 }
