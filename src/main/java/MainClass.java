@@ -9,7 +9,7 @@ public class MainClass {
 
     public static void main (String [] args){
         FindWords oFindWords = new FindWords();
-        oList= oFindWords.getListPossibleWords("LSTA");
+        oList= oFindWords.getListPossibleWords("abtle");
 
         System.out.println(oList.toString());
 
