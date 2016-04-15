@@ -60,6 +60,7 @@ public class FindWords {
 
     public List<String> getListPossibleWords(String sInputText){
 
+        //Local variables
         String sWordToIterate = sInputText.toUpperCase();
 
         int iStringLenght = sWordToIterate.length();
@@ -70,6 +71,7 @@ public class FindWords {
         char [] aCharToIterate = sWordToIterate.toCharArray();
         char [] aCharPossibleWord;
 
+        //New list for length
 
         for (String anOListDictionary : oListDictionary) {
             if (anOListDictionary.toString().length() == iStringLenght) {
@@ -77,6 +79,7 @@ public class FindWords {
             }
         }
 
+        //Discard the words that not match with the Input Word
         for (String sPossibleWord: oListPossibleWords) {
 
             boolean bCharOk = true;
@@ -97,6 +100,8 @@ public class FindWords {
                 oListFinalPWords.add(sPossibleWord);
             }
         }
+
+        //return de final list of words
         return oListFinalPWords;
     }
 }
